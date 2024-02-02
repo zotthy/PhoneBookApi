@@ -1,0 +1,3 @@
+@post zapis danych
+@get szukanie do nazwie, regionie, osobie(nazwisku)
+walidacja
