@@ -48,8 +48,12 @@ public class PhoneService {
                 .map(databaseDtoMapper::map);
     }
 
-    public List<Database> findByname(String name) {
-        return phoneRepozytory.findByName(name);
+    public List<Database> findByname(String name,String surname) {
+        List<Database> results = phoneRepozytory.findByNameAndAndSurname(name, surname);
+
+        return results.stream()
+                .filter(Database::isAprove)
+                .collect(Collectors.toList());
     }
 
     ////ADMIN CONTROLLER
