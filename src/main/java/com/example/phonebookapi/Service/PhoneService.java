@@ -25,6 +25,7 @@ public class PhoneService {
         this.databaseDtoMapper = databaseDtoMapper;
     }
 
+    //Aprove is true
     public Page<DatabaseDto> find(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Database> databasePage = phoneRepozytory.findByAproveTrue(pageable);
@@ -35,7 +36,6 @@ public class PhoneService {
 
         return new PageImpl<>(dtoList, pageable, databasePage.getTotalElements());
     }
-
 
     public DatabaseDto save(DatabaseDto databaseDto){
         Database database = databaseDtoMapper.map(databaseDto);
@@ -48,18 +48,35 @@ public class PhoneService {
                 .map(databaseDtoMapper::map);
     }
 
-    public Page<Database> findwithpagionation(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return phoneRepozytory.findAll(pageable);
-    }
-
     public List<Database> findByname(String name) {
         return phoneRepozytory.findByName(name);
     }
 
-    public List<Database> findnamesurname(String name, String surname) {
-        return phoneRepozytory.findByNameAndAndSurname(name, surname);
+    ////ADMIN CONTROLLER
+
+    //Aprove is false for admin panel
+    public Page<DatabaseDto> findAproveFalse(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Database> databasePage = phoneRepozytory.findByAproveFalse(pageable);
+
+        List<DatabaseDto> dtoList = databasePage.getContent().stream()
+                .map(database -> databaseDtoMapper.map(database))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(dtoList, pageable, databasePage.getTotalElements());
     }
 
+    public Optional<DatabaseDto> updateData(Long id, DatabaseDto databaseDto) {
+        System.out.println(id);
+        System.out.println(databaseDto.toString());
+        if (!phoneRepozytory.existsById(id)) {
+            return Optional.empty();
+        }
+
+        databaseDto.setId(id);
+        Database databaseToUpdate = databaseDtoMapper.map(databaseDto);
+        Database updatedDatabase = phoneRepozytory.save(databaseToUpdate);
+        return Optional.of(databaseDtoMapper.map(updatedDatabase));
+    }
 
 }

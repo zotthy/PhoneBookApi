@@ -2,18 +2,14 @@ package com.example.phonebookapi.Controller;
 
 import com.example.phonebookapi.Entity.DatabaseDto;
 import com.example.phonebookapi.Service.PhoneService;
+import jakarta.persistence.Id;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 
 @RestController
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class PhoneBookControllerAdmin {
     private final PhoneService phoneService;
 
@@ -21,4 +17,24 @@ public class PhoneBookControllerAdmin {
         this.phoneService = phoneService;
     }
 
+    @GetMapping("/acceptable")
+    public ResponseEntity<Page<DatabaseDto>> pageResponseEntity(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        Page<DatabaseDto> dtoPage = phoneService.findAproveFalse(page, size);
+        return ResponseEntity.ok(dtoPage);
+    }
+
+    @GetMapping("/acceptable/{id}")
+    public ResponseEntity<DatabaseDto> getDetails(@PathVariable Long id) {
+        return phoneService.getDataByid(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/acceptable/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody DatabaseDto databaseDto){
+        return phoneService.updateData(id, databaseDto)
+                .map(c->ResponseEntity.noContent().build())
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
+
