@@ -39,9 +39,10 @@ public class PhoneBookController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<List<Database>> find(@RequestParam(name = "name") String name) {
-        List<Database> result = phoneService.findByname(name);
-        System.out.println(name);
+    public ResponseEntity<List<Database>> find(@RequestParam(name = "name") String name,
+                                               @RequestParam(name = "surname") String surname) {
+
+        List<Database> result = phoneService.findByname(name,surname);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
