@@ -12,9 +12,11 @@ public class DatabaseDto {
 
     private int buildnumber;
 
-    private int numbertel;
+    private String numbertel;
 
-    public DatabaseDto(Long id, String name, String surname, String city, String street, int buildnumber, int numbertel) {
+    private boolean aprove;
+
+    public DatabaseDto(Long id, String name, String surname, String city, String street, int buildnumber, String numbertel, boolean aprove) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -22,14 +24,23 @@ public class DatabaseDto {
         this.street = street;
         this.buildnumber = buildnumber;
         this.numbertel = numbertel;
+        this.aprove = aprove;
     }
 
-    public int getNumbertel() {
+    public String getNumbertel() {
         return numbertel;
     }
 
-    public void setNumbertel(int numbertel) {
+    public void setNumbertel(String numbertel) {
         this.numbertel = numbertel;
+    }
+
+    public boolean isAprove() {
+        return aprove;
+    }
+
+    public void setAprove(boolean aprove) {
+        this.aprove = aprove;
     }
 
     public DatabaseDto() {
@@ -83,4 +94,5 @@ public class DatabaseDto {
     public void setBuildnumber(int buildnumber) {
         this.buildnumber = buildnumber;
     }
+
 }

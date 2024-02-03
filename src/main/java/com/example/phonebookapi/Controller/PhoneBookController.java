@@ -1,19 +1,20 @@
 package com.example.phonebookapi.Controller;
 
 import com.example.phonebookapi.Entity.Database;
+import com.example.phonebookapi.Entity.DatabaseDto;
 import com.example.phonebookapi.Service.PhoneService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("data")
+@RequestMapping("/data")
 public class PhoneBookController {
     private final PhoneService phoneService;
 
@@ -22,19 +23,19 @@ public class PhoneBookController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<Database>> pageResponseEntity(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        Page<Database> dtoPage = phoneService.findwithpagionation(page, size);
-        return new ResponseEntity<>(dtoPage, HttpStatus.OK);
+    public ResponseEntity<Page<DatabaseDto>> pageResponseEntity(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        Page<DatabaseDto> dtoPage = phoneService.find(page, size);
+        return ResponseEntity.ok(dtoPage);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Database>> searchBy(
-            @RequestParam(name = "name") String name,
-            @RequestParam(name = "surname") String surname) {
-
-        List<Database> result = phoneService.findnamesurname(name, surname);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @PostMapping("/add")
+    public ResponseEntity<DatabaseDto> saveDatabase(@RequestBody DatabaseDto databaseDto) {
+        DatabaseDto savedata = phoneService.save(databaseDto);
+        URI savedUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedata.getId())
+                .toUri();
+        return ResponseEntity.created(savedUri).body(savedata);
     }
 
     @GetMapping("/find")
@@ -43,4 +44,12 @@ public class PhoneBookController {
         System.out.println(name);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatabaseDto> getDetails(@PathVariable Long id){
+        return phoneService.getDataByid(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
