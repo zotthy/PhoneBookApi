@@ -18,8 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public
-class JwtService {
+public class JwtService {
     private static final int EXP_TIME_SEC = 30 * 24 * 60 * 60; //czas ważności tokena
     private final JWSAlgorithm jwsAlgorithm = JWSAlgorithm.HS256; // algorytm
     private final JWSSigner signer;
