@@ -4,7 +4,7 @@ spring:
     username: admin
     password: admin
   profiles:
-    default: "final"
+    default: "h2"
   jpa:
     show-sql: true
     hibernate:

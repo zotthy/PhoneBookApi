@@ -39,7 +39,14 @@ class SecurityConfigFinal {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtService);
         BearerTokenFilter bearerTokenFilter = new BearerTokenFilter(jwtService);
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers(mvc.pattern(HttpMethod.GET,"/admin/acceptable")).hasRole("ADMIN")
+                .requestMatchers(mvc.pattern("/admin/acceptable")).hasRole("ADMIN")
+                .requestMatchers(mvc.pattern("/admin/acceptable/{id}")).hasRole("ADMIN")
+                .requestMatchers(mvc.pattern("/admin/acceptable/update/{id}")).hasRole("ADMIN")
+                .requestMatchers(mvc.pattern(HttpMethod.PUT,"/admin/acceptable/{id})")).hasRole("ADMIN")
+                .requestMatchers(mvc.pattern("/data/all")).permitAll()
+                .requestMatchers(mvc.pattern("/data/find")).permitAll()
+                .requestMatchers(mvc.pattern("/data/add")).hasRole("USER")
+                .requestMatchers(mvc.pattern("/data/{id}")).hasRole("USER")
                 .anyRequest().permitAll()
         );
         http.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -73,9 +80,6 @@ class SecurityConfigH2 {
         BearerTokenFilter bearerTokenFilter = new BearerTokenFilter(jwtService);
         PathRequest.H2ConsoleRequestMatcher h2ConsoleRequestMatcher = PathRequest.toH2Console(); //dostep do h2
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers(mvc.pattern("/admin/acceptable")).hasRole("ADMIN")
-                .requestMatchers(mvc.pattern(HttpMethod.PUT,"/admin/acceptable/{id})")).hasRole("ADMIN")
-                .requestMatchers(mvc.pattern(HttpMethod.))
                 .anyRequest().permitAll()
         );
         http.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
