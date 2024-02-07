@@ -19,3 +19,23 @@ VALUES ( 'John',          'Doe',          'Warszawa',     'Aleje Jerozolimskie',
        ( 'Kamila',       'Jankowska',    'Zielona Góra', 'Słowiańska',               666, true , 4899911  ),
        ( 'Kamil',        'Kaczmarek',    'Tarnów',       'Mickiewicza',              777, true , 481222   ),
        ( 'Wiktoria',     'Sikorska',     'Rzeszów',      'Piłsudskiego',             888, true , 48233    );
+
+INSERT INTO
+    user_app (first_name, last_name, email, password)
+VALUES
+    -- admin@admin.com / admin
+    ('admin', 'admin', 'admin@admin.com', '{bcrypt}$2a$13$9kqnZ.VftG7t2z7R5LiVJeMDZ1/lWbbI/XjoNtoGsyvlupmKrBfri'),
+    -- user@user.com / user
+    ('user', 'user', 'user@user.com', '{bcrypt}$2a$13$JCluwrAdOFZoz4BniHaL5eH0.9wzTLU.aEGA78bEJprmIHhFLPOD2');
+
+INSERT INTO
+    user_role (name, description)
+VALUES
+    ('ADMIN', 'moze edytoqwac i zatwierdzac'),
+    ('USER', 'sklada prosbe o dodanie numeru do wreyfikacji');
+
+INSERT INTO
+    user_roles (user_id, role_id)
+VALUES
+    (1, 1),
+    (2, 2);

@@ -30,6 +30,7 @@ public class PhoneBookController {
 
     @PostMapping("/add")
     public ResponseEntity<DatabaseDto> saveDatabase(@RequestBody DatabaseDto databaseDto) {
+        databaseDto.setAprove(false);
         DatabaseDto savedata = phoneService.save(databaseDto);
         URI savedUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
