@@ -1,4 +1,8 @@
-package com.example.phonebookapi.Entity;
+package com.example.phonebookapi.Dtos;
+
+import com.example.phonebookapi.Dtos.UserSecDto;
+import com.example.phonebookapi.Entity.User;
+import com.example.phonebookapi.Entity.UserRole;
 
 import java.util.Set;
 import java.util.stream.Collectors;

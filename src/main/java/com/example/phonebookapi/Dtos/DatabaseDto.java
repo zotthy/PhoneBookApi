@@ -1,4 +1,4 @@
-package com.example.phonebookapi.Entity;
+package com.example.phonebookapi.Dtos;
 
 public class DatabaseDto {
     private Long id;

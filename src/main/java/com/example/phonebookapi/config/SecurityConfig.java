@@ -12,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
@@ -55,6 +57,10 @@ class SecurityConfigFinal {
         http.addFilterBefore(bearerTokenFilter, AuthorizationFilter.class);
         return http.build();
     }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 }
 
 @Profile("h2")
@@ -88,5 +94,9 @@ class SecurityConfigH2 {
         http.addFilterBefore(jwtAuthenticationFilter, AuthorizationFilter.class);
         http.addFilterBefore(bearerTokenFilter, AuthorizationFilter.class);
         return http.build();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }

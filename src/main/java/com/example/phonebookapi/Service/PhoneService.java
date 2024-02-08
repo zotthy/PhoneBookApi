@@ -1,8 +1,8 @@
 package com.example.phonebookapi.Service;
 
 import com.example.phonebookapi.Entity.Database;
-import com.example.phonebookapi.Entity.DatabaseDto;
-import com.example.phonebookapi.Entity.DatabaseDtoMapper;
+import com.example.phonebookapi.Dtos.DatabaseDto;
+import com.example.phonebookapi.Dtos.DatabaseDtoMapper;
 import com.example.phonebookapi.Repozytory.PhoneRepozytory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -1,8 +1,7 @@
 package com.example.phonebookapi.Controller;
 
-import com.example.phonebookapi.Entity.DatabaseDto;
+import com.example.phonebookapi.Dtos.DatabaseDto;
 import com.example.phonebookapi.Service.PhoneService;
-import jakarta.persistence.Id;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

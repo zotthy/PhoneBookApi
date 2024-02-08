@@ -1,5 +1,5 @@
 package com.example.phonebookapi.Security;
-import com.example.phonebookapi.Entity.UserSecDto;
+import com.example.phonebookapi.Dtos.UserSecDto;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

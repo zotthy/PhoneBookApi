@@ -1,7 +1,7 @@
 package com.example.phonebookapi.Security;
 
-import com.example.phonebookapi.Entity.UserSecDto;
-import com.example.phonebookapi.Entity.UserSecDtoMapper;
+import com.example.phonebookapi.Dtos.UserSecDto;
+import com.example.phonebookapi.Dtos.UserSecDtoMapper;
 import com.example.phonebookapi.Repozytory.UserRepozytory;
 import org.springframework.stereotype.Service;
 
