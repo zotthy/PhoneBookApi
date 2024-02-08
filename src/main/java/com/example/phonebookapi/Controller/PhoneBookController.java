@@ -1,14 +1,13 @@
 package com.example.phonebookapi.Controller;
 
 import com.example.phonebookapi.Entity.Database;
-import com.example.phonebookapi.Entity.DatabaseDto;
+import com.example.phonebookapi.Dtos.DatabaseDto;
 import com.example.phonebookapi.Service.PhoneService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;

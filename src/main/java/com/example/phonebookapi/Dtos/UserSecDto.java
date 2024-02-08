@@ -1,4 +1,4 @@
-package com.example.phonebookapi.Entity;
+package com.example.phonebookapi.Dtos;
 
 import java.util.Set;
 

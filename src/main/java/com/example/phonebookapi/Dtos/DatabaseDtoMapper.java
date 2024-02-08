@@ -1,5 +1,7 @@
-package com.example.phonebookapi.Entity;
+package com.example.phonebookapi.Dtos;
 
+import com.example.phonebookapi.Dtos.DatabaseDto;
+import com.example.phonebookapi.Entity.Database;
 import org.springframework.stereotype.Service;
 
 @Service
