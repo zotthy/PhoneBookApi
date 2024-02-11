@@ -23,6 +23,7 @@ public class DatabaseDtoMapper {
         database.setId(databaseDto.getId());
         database.setName(databaseDto.getName());
         database.setSurname(databaseDto.getSurname());
+        database.setCity(databaseDto.getCity());
         database.setStreet(databaseDto.getStreet());
         database.setBuildnumber(databaseDto.getBuildnumber());
         database.setNumbertel(databaseDto.getNumbertel());

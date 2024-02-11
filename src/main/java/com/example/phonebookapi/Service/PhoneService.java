@@ -70,6 +70,17 @@ public class PhoneService {
         return new PageImpl<>(dtoList, pageable, databasePage.getTotalElements());
     }
 
+    public Page<DatabaseDto> findAllAdmin(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Database> databasePage = phoneRepozytory.findAll(pageable);
+
+        List<DatabaseDto> dtoList = databasePage.getContent().stream()
+                .map(database -> databaseDtoMapper.map(database))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(dtoList, pageable, databasePage.getTotalElements());
+    }
+
     public Optional<DatabaseDto> updateData(Long id, DatabaseDto databaseDto) {
         System.out.println(id);
         System.out.println(databaseDto.toString());
