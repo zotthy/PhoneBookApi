@@ -41,9 +41,11 @@ class SecurityConfigFinal {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtService);
         BearerTokenFilter bearerTokenFilter = new BearerTokenFilter(jwtService);
         http.authorizeHttpRequests(requests -> requests
+                .requestMatchers(mvc.pattern("/auth")).permitAll()
                 .requestMatchers(mvc.pattern("/admin/acceptable")).hasRole("ADMIN")
                 .requestMatchers(mvc.pattern("/admin/acceptable/{id}")).hasRole("ADMIN")
                 .requestMatchers(mvc.pattern("/admin/acceptable/update/{id}")).hasRole("ADMIN")
+                .requestMatchers(mvc.pattern("admin/all-data")).hasRole("ADMIN")
                 .requestMatchers(mvc.pattern(HttpMethod.PUT,"/admin/acceptable/{id})")).hasRole("ADMIN")
                 .requestMatchers(mvc.pattern("/data/all")).permitAll()
                 .requestMatchers(mvc.pattern("/data/find")).permitAll()

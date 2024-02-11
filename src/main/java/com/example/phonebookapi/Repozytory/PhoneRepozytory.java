@@ -15,4 +15,6 @@ public interface PhoneRepozytory extends JpaRepository<Database, Long> {
 
     Page<Database> findByAproveTrue(Pageable pageable);
     Page<Database> findByAproveFalse(Pageable pageable);
+
+    Page<Database> findAll(Pageable pageable);
 }

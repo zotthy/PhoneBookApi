@@ -29,6 +29,12 @@ public class PhoneBookControllerAdmin {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/all-data")
+    public ResponseEntity<Page<DatabaseDto>> getAllAdmin(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<DatabaseDto> findAllAdmin = phoneService.findAllAdmin(page,size);
+        return ResponseEntity.ok(findAllAdmin);
+    }
+
     @PutMapping("/acceptable/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody DatabaseDto databaseDto){
         return phoneService.updateData(id, databaseDto)
