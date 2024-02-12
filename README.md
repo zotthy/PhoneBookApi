@@ -13,8 +13,7 @@ Project is created with:
 git clone https://github.com/zotthy/PhoneBookApi.git
 
 
-cd PhoneBookApi/src/main/java/com/example/phonebookapi
-
+cd PhoneBookApi
 
 ./mvnw spring-boot:run
 
